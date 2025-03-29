@@ -1,0 +1,26 @@
+{
+  "name": "song-request-client",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@tailwindcss/postcss": "^4.0.7",
+    "@tanstack/react-query": "^5.66.7",
+    "@tanstack/react-router": "^1.111.6",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tailwindcss": "^4.0.7"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "buffer": "^6.0.3",
+    "parcel": "^2.13.3",
+    "process": "^0.11.10"
+  },
+  "scripts": {
+    "start": "parcel src/index.html",
+    "build": "parcel build src/index.html",
+    "watch": "parcel watch src/index.html",
+    "clean": "rm -rf dist .parcel-cache"
+  }
+}
