@@ -4,6 +4,38 @@
 
 This application allows listeners to browse and request songs for a radio station or event using PlayIt Live's library. It provides a simple, user-friendly interface for song requests and an admin dashboard to manage those requests.
 
+## Deploying with Digital Ocean
+
+### Sign up for Digital Ocean
+1. Go to [Digital Ocean](https://www.digitalocean.com/)
+2. Create an account if you don't have one
+3. Add a payment method to your account
+
+### Create a new App
+1. From the Digital Ocean dashboard, click "App Platform" in the sidebar and click "Create App"
+2. Choose "Container image" as your source
+3. Choose "GitHub Container Registry" as the Registry Provider
+   - Repository: `playitlabs/song-requests`
+   - Tag: `latest`
+   - Credentials: <leave blank>
+4. Click Next
+5. Under App, click Edit
+   - Resource Size: Change to 512 MB RAM, 1 Shared vCPU option
+   - Ports: Change to 80
+   - Click < Back
+6. Click Next
+7. Under Environment Variables, click Edit beside Global and add the following:
+   - PLAYIT_LIVE_BASE_URL = https://yourserver.playitradio.com:25433
+   - PLAYIT_LIVE_API_KEY = your_api_key_here
+   - ADMIN_PASSWORD = your_secure_admin_password
+8. Click Next
+9. Click Next
+10. Click Create Resources
+
+Your app will be deployed and accessible at the URL provided by Digital Ocean. You can configure a custom domain in the app settings if desired.
+
+Note: The app will automatically pull the latest version of the container image when deploying. If you want to update to a newer version later, you can trigger a manual deployment from the Digital Ocean dashboard.
+
 ## Features
 
 - **Public-facing song request page**
@@ -120,39 +152,6 @@ docker run -p 3000:3000 \
 ghcr.io/playitlabs/song-requests:latest
 
 The application will be available at `http://localhost:3000`
-
-## Deploying with Digital Ocean
-
-### Sign up for Digital Ocean
-1. Go to [Digital Ocean](https://www.digitalocean.com/)
-2. Create an account if you don't have one
-3. Add a payment method to your account
-
-### Create a new App
-1. From the Digital Ocean dashboard, click "App Platform" in the sidebar and click "Create App"
-2. Choose "Container image" as your source
-3. Choose "GitHub Container Registry" as the Registry Provider
-   - Repository: `playitlabs/song-requests`
-   - Tag: `latest`
-   - Credentials: <leave blank>
-4. Click Next
-5. Under App, click Edit
-   - Resource Size: Change to 512 MB RAM, 1 Shared vCPU option
-   - Ports: Change to 80
-   - Click < Back
-6. Click Next
-7. Under Environment Variables, click Edit beside Global and add the following:
-   - PLAYIT_LIVE_BASE_URL = https://yourserver.playitradio.com:25433
-   - PLAYIT_LIVE_API_KEY = your_api_key_here
-   - ADMIN_PASSWORD = your_secure_admin_password
-8. Click Next
-9. Click Next
-10. Click Create Resources
-
-Your app will be deployed and accessible at the URL provided by Digital Ocean. You can configure a custom domain in the app settings if desired.
-
-Note: The app will automatically pull the latest version of the container image when deploying. If you want to update to a newer version later, you can trigger a manual deployment from the Digital Ocean dashboard.
-
 
 
 
