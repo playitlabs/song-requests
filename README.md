@@ -6,10 +6,27 @@ This application allows listeners to browse and request songs for a radio statio
 
 ## Deploying with Digital Ocean
 
+### Prerequisites
+
+- A Digital Ocean account
+- The PlayIt Remote Management module for API access
+- A PlayIt Live API key
+
+### Set up Remote Management and API Access
+1. On PlayIt Live, go to "File > Enable remote connections..."
+2. Click "Start Server"
+3. Under "Help me set up external access", follow the instructions to enable access to PlayIt Live from outside your local network
+4. Make a note of the external URL at the bottom, e.g. https://yourserver.playitradio.com:25433
+5. Click the link to open remote management locally in a browser, e.g. https://localhost:25433
+6. Click "Remote Management" and log in if necessary
+7. Click "Settings & Tools" and then "API Keys"
+8. Type a name for your API key (e.g. Song Requests) and click "Create"
+9. Click the API Key to copy the API Key and save it for later
+
 ### Sign up for Digital Ocean
 1. Go to [Digital Ocean](https://www.digitalocean.com/)
 2. Create an account if you don't have one
-3. Add a payment method to your account
+3. Add a payment method to your account. Deploying onto Digital Ocean will cost $5/month.
 
 ### Create a new App
 1. From the Digital Ocean dashboard, click "App Platform" in the sidebar and click "Create App"
