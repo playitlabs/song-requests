@@ -11,6 +11,7 @@ This application allows listeners to browse and request songs for a radio statio
 - A Digital Ocean account
 - The PlayIt Remote Management module for API access
 - A PlayIt Live API key
+- A track group in PlayIt Live that contains the songs you want to be requestable
 
 ### Set up Remote Management and API Access
 1. On PlayIt Live, go to "File > Enable remote connections..."
@@ -34,24 +35,34 @@ This application allows listeners to browse and request songs for a radio statio
 3. Choose "GitHub Container Registry" as the Registry Provider
    - Repository: `playitlabs/song-requests`
    - Tag: `latest`
-   - Credentials: <leave blank>
+   - Credentials: `<leave blank>`
 4. Click Next
-5. Under App, click Edit
-   - Resource Size: Change to 512 MB RAM, 1 Shared vCPU option
-   - Ports: Change to 80
-   - Click < Back
-6. Click Next
-7. Under Environment Variables, click Edit beside Global and add the following:
-   - PLAYIT_LIVE_BASE_URL = https://yourserver.playitradio.com:25433
-   - PLAYIT_LIVE_API_KEY = your_api_key_here
-   - ADMIN_PASSWORD = your_secure_admin_password
-8. Click Next
-9. Click Next
-10. Click Create Resources
+5. Under App Settings
+   - Under Size, click Edit
+      - Change to 512 MB RAM, 1 Shared vCPU option ($5/month)
+      - Click Close
+   - Under Network, click Edit
+      - Change Public HTTP port to 80
+      - Click Close
+   - Under Environment Variables, click Edit and add the following (Key = Value):
+      - PLAYIT_LIVE_BASE_URL = https://yourserver.playitradio.com:25433
+      - PLAYIT_LIVE_API_KEY = your_api_key_here
+      - ADMIN_PASSWORD = your_secure_admin_password
+      - REQUESTABLE_TRACK_GROUP_NAME = your_requestable_track_group_name
+6. Click Create App
 
-Your app will be deployed and accessible at the URL provided by Digital Ocean. You can configure a custom domain in the app settings if desired.
+Your app will be deployed and accessible at the URL provided by Digital Ocean, e.g. `<your-app-name>.ondigitalocean.app`. You can configure a custom domain under Settings > Domains if desired.
+
+You may access the admin dashboard at `<your-app-name>.ondigitalocean.app/admin` and log in with the password you set in the environment variables.
 
 Note: The app will automatically pull the latest version of the container image when deploying. If you want to update to a newer version later, you can trigger a manual deployment from the Digital Ocean dashboard.
+
+### How to add requests to PlayIt Live
+
+- Add a Break Note item in the playout log or clocks with the text **Request** before each requestable slot.
+- The app will look for these break notes and replace the song after the break note with the requested song.
+- When listeners request a song, they will be prompted to enter their name which will be displayed in the break note text once the request is processed.
+- Requests are processed automatically in the order they are received.
 
 ## Features
 
@@ -59,10 +70,6 @@ Note: The app will automatically pull the latest version of the container image 
   - Search through available tracks
   - Submit song requests with name
   - Mobile-friendly interface
-
-- **Support for requests in PlayIt Live**
-  - Place a Break Note item in the playout log or clocks with the text **Request**
-  - The app will look for these break notes and replace the song after the break note with the requested song
 
 - **Admin dashboard**
   - Secure JWT-based authentication system
