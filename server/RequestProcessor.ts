@@ -32,7 +32,13 @@ export class RequestProcessor {
                 }
 
                 if (await this.requestAgent.canRequestTrack(request.trackGuid, item.requestItemGuid)) {
-                    await this.requestAgent.requestTrack(request.trackGuid, item.breakNoteItemGuid, item.requestItemGuid, request.requestedBy);
+
+                    let requestText = request.requestedBy;
+                    if(request.message) {
+                        requestText += `: ${request.message}`;
+                    }
+
+                    await this.requestAgent.requestTrack(request.trackGuid, item.breakNoteItemGuid, item.requestItemGuid, requestText);
                     await this.requests.markAsProcessed(request.id);
                     availableItems.splice(availableItems.indexOf(item), 1);
                     processed = true;

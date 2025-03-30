@@ -65,13 +65,14 @@ Note: The app will automatically pull the latest version of the container image 
 - Add a Break Note item in the playout log or clocks with the text **Request** before each requestable slot.
 - The app will look for these break notes and replace the song after the break note with the requested song.
 - When listeners request a song, they will be prompted to enter their name which will be displayed in the break note text once the request is processed.
+- Listeners can also add an optional message that will appear on the Break Note alongside their name.
 - Requests are processed automatically in the order they are received.
 
 ## Features
 
 - **Public-facing song request page**
   - Search through available tracks
-  - Submit song requests with name
+  - Submit song requests with name and optional message
   - Mobile-friendly interface
 
 - **Admin dashboard**
@@ -137,6 +138,7 @@ REQUESTABLE_TRACK_GROUP_NAME=Optional_Track_Group
 ADMIN_PASSWORD=your_secure_admin_password
 JWT_SECRET=random_secret_key_for_jwt
 PORT=3000
+MAX_MESSAGE_LENGTH=150
 ```
 
 Variables explained:
@@ -146,6 +148,7 @@ Variables explained:
 - `ADMIN_PASSWORD`: Password for accessing the admin page
 - `JWT_SECRET`: Secret key for signing JWT tokens (optional, uses API key as fallback)
 - `PORT`: Port for the web server
+- `MAX_MESSAGE_LENGTH`: Maximum character limit for listener messages (default: 150)
 
 ## Installation
 

@@ -25,6 +25,7 @@ The PlayIt Live Song Request Application is a web-based platform that integrates
 #### 3.1.2 Request Submission
 - Simple form for submitting song requests
 - Required fields: name of requestor
+- Optional fields: message (limited to 150 characters by default, configurable via environment variable)
 - Confirmation message after successful submission
 
 #### 3.1.3 User Interface
@@ -47,6 +48,7 @@ The PlayIt Live Song Request Application is a web-based platform that integrates
 - View request details:
   - Requestor name
   - Requested song
+  - Listener message (if provided)
   - Timestamp
   - IP address
 
@@ -126,3 +128,4 @@ The PlayIt Live Song Request Application is a web-based platform that integrates
 - `ADMIN_PASSWORD`: Password for accessing the admin page
 - `JWT_SECRET`: Secret key for signing JWT tokens (optional, uses API key as fallback)
 - `PORT`: Port for the web server (default: 3000)
+- `MAX_MESSAGE_LENGTH`: Maximum character limit for listener messages (default: 150)

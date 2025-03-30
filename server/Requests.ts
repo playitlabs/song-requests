@@ -8,11 +8,12 @@ export class Requests {
         this.requests = [];
     }
 
-    async addRequest(trackGuid: any, requestedBy: any, ipAddress?: string) {
+    async addRequest(trackGuid: any, requestedBy: any, message?: string, ipAddress?: string) {
         this.requests.push({
             id: uuidv4(),
             trackGuid,
             requestedBy,
+            message,
             ipAddress: ipAddress,
             requestedAt: new Date()
         });

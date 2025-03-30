@@ -121,6 +121,7 @@ export function AdminRequestList({ token, onLogout }: AdminRequestListProps) {
                             <tr>
                                 <th className="py-3 px-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Song</th>
                                 <th className="py-3 px-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Requested By</th>
+                                <th className="py-3 px-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Message</th>
                                 <th className="py-3 px-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Requested Time</th>
                                 <th className="py-3 px-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">IP Address</th>
                                 <th className="py-3 px-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Processed Time</th>
@@ -131,16 +132,19 @@ export function AdminRequestList({ token, onLogout }: AdminRequestListProps) {
                             {requests?.length ? (
                                 requests.sort((a, b) => new Date(b.requestedAt).getTime() - new Date(a.requestedAt).getTime()).map(request => (
                                     <tr key={request.id} className="hover:bg-gray-50">
-                                        <td className="py-4 px-4 whitespace-nowrap">{getTrackName(request.trackGuid)}</td>
-                                        <td className="py-4 px-4 whitespace-nowrap">{request.requestedBy}</td>
-                                        <td className="py-4 px-4 whitespace-nowrap">
+                                        <td className="py-4 px-4 whitespace-nowrap align-top">{getTrackName(request.trackGuid)}</td>
+                                        <td className="py-4 px-4 whitespace-nowrap align-top">{request.requestedBy}</td>
+                                        <td className="py-4 px-4 max-w-xs align-top whitespace-pre-line">
+                                            {request.message || '-'}
+                                        </td>
+                                        <td className="py-4 px-4 whitespace-nowrap align-top">
                                             {new Date(request.requestedAt).toLocaleString()}
                                         </td>
-                                        <td className="py-4 px-4 whitespace-nowrap">{request.ipAddress || 'Unknown'}</td>
-                                        <td className="py-4 px-4 whitespace-nowrap">
+                                        <td className="py-4 px-4 whitespace-nowrap align-top">{request.ipAddress || 'Unknown'}</td>
+                                        <td className="py-4 px-4 whitespace-nowrap align-top">
                                             {request.processedAt ? new Date(request.processedAt).toLocaleString() : 'Not processed'}
                                         </td>
-                                        <td className="py-4 px-4 whitespace-nowrap">
+                                        <td className="py-4 px-4 whitespace-nowrap align-top">
                                             {!request.processedAt && (
                                                 <button
                                                     onClick={() => handleDeleteRequest(request.id)}
@@ -154,7 +158,7 @@ export function AdminRequestList({ token, onLogout }: AdminRequestListProps) {
                                 ))
                             ) : (
                                 <tr>
-                                    <td colSpan={6} className="py-4 px-4 text-center text-gray-500">No requests yet</td>
+                                    <td colSpan={7} className="py-4 px-4 text-center text-gray-500">No requests yet</td>
                                 </tr>
                             )}
                         </tbody>

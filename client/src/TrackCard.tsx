@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { TrackDto } from '../../shared/TrackDto';
 import useLocalStorage from './hooks/useLocalStorage';
+import { useSettingsQuery } from './queries/Settings';
 
 export function TrackCard({ track }: { track: TrackDto }) {
     const [showConfirm, setShowConfirm] = useState(false);
     const [requesterName, setRequesterName] = useLocalStorage<string>('songRequestName', '');
+    const [requesterMessage, setRequesterMessage] = useState('');
     const [isRequested, setIsRequested] = useState(false);
     const [requestTime, setRequestTime] = useState<Date | null>(null);
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
+    const maxMessageLength = useSettingsQuery().data?.maxMessageLength || 150;
 
     // Reset the requested status after 30 seconds
     useEffect(() => {
@@ -33,7 +36,11 @@ export function TrackCard({ track }: { track: TrackDto }) {
         console.log('Requesting track:', track.guid);
         fetch('/api/requestTrack', {
             method: 'POST',
-            body: JSON.stringify({ trackGuid: track.guid, requestedBy: requesterName }),
+            body: JSON.stringify({ 
+                trackGuid: track.guid, 
+                requestedBy: requesterName,
+                message: requesterMessage.trim() || undefined
+            }),
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -43,10 +50,16 @@ export function TrackCard({ track }: { track: TrackDto }) {
                 setIsRequested(true);
                 setRequestTime(new Date());
                 setShowConfirm(false);
+                setRequesterMessage(''); // Clear message for next request
             } else if (response.status === 409) {
                 // Song is already requested
                 return response.json().then(data => {
                     setErrorMessage(data.message || 'This song has already been requested recently.');
+                });
+            } else if (response.status === 400) {
+                // Validation error (e.g., message too long)
+                return response.json().then(data => {
+                    setErrorMessage(data.message || 'Invalid request parameters.');
                 });
             } else {
                 return response.json().then(data => {
@@ -123,7 +136,7 @@ export function TrackCard({ track }: { track: TrackDto }) {
                                         type="text"
                                         id="requesterName"
                                         name="requesterName"
-                                        autoFocus
+                                        autoFocus={!requesterName}
                                         value={requesterName}
                                         onChange={(e) => setRequesterName(e.target.value)}
                                         placeholder="Enter your name"
@@ -136,6 +149,30 @@ export function TrackCard({ track }: { track: TrackDto }) {
                                         </p>
                                     )}
                                 </div>
+                                
+                                <div className="mb-4">
+                                    <label htmlFor="requesterMessage" className="block text-sm font-medium text-gray-700 mb-1">
+                                        Message (optional)
+                                    </label>
+                                    <textarea
+                                        id="requesterMessage"
+                                        name="requesterMessage"
+                                        value={requesterMessage}
+                                        autoFocus={!!requesterName}
+                                        onChange={(e) => {
+                                            if (e.target.value.length <= maxMessageLength) {
+                                                setRequesterMessage(e.target.value);
+                                            }
+                                        }}
+                                        placeholder={`Add a message (max ${maxMessageLength} characters)`}
+                                        className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 resize-none"
+                                        rows={3}
+                                    />
+                                    <p className="text-xs text-gray-500 mt-1 flex justify-end">
+                                        <span>{requesterMessage.length}/{maxMessageLength}</span>
+                                    </p>
+                                </div>
+                                
                                 <div className="flex justify-end space-x-3">
                                     <button
                                         type="button"
