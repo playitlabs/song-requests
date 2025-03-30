@@ -179,6 +179,7 @@ docker run -p 3000:3000 \
 -e PLAYIT_LIVE_BASE_URL=http://your-server \
 -e PLAYIT_LIVE_API_KEY=your_key \
 -e ADMIN_PASSWORD=your_secure_password \
+-e REQUESTABLE_TRACK_GROUP_NAME=your_requestable_track_group_name \
 ghcr.io/playitlabs/song-requests:latest
 
 The application will be available at `http://localhost:3000`
