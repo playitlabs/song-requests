@@ -56,9 +56,11 @@ This application allows listeners to browse and request songs for a radio statio
 
 Your app will be deployed and accessible at the URL provided by Digital Ocean, e.g. `<your-app-name>.ondigitalocean.app`. You can configure a custom domain under Settings > Domains if desired.
 
-You may access the admin dashboard at `<your-app-name>.ondigitalocean.app/admin` and log in with the password you set in the environment variables.
-
 Note: The app will automatically pull the latest version of the container image when deploying. If you want to update to a newer version later, you can trigger a manual deployment from the Digital Ocean dashboard.
+
+### Accessing the Admin Dashboard
+
+You may access the admin dashboard at `<your-app-name>.ondigitalocean.app/admin` and log in with the password you set in the environment variables.
 
 ### How to add requests to PlayIt Live
 
