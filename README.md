@@ -147,8 +147,8 @@ Variables explained:
 ## Installation
 
 ### Clone the repository
-git clone https://github.com/yourusername/song-request-app.git
-cd song-request-app
+git clone https://github.com/playitlabs/song-requests.git
+cd song-requests
 
 ### Install server dependencies
 cd server
