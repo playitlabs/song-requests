@@ -1,5 +1,8 @@
 # PlayIt Live Song Request Application
 
+> [!CAUTION]
+> Disclaimer: This application is provided as-is and is not supported by PlayIt Software Ltd. Use at your own risk.
+
 ## Overview
 
 This application allows listeners to browse and request songs for a radio station or event using PlayIt Live's library. It provides a simple, user-friendly interface for song requests and an admin dashboard to manage those requests.
