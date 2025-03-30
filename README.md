@@ -1,6 +1,6 @@
 # PlayIt Live Song Request Application
 
-> [!CAUTION]
+> [!WARNING]
 > Disclaimer: This application is provided as-is and is not supported by PlayIt Software Ltd. Use at your own risk.
 
 ## Overview
