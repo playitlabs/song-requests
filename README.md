@@ -60,6 +60,10 @@ Note: The app will automatically pull the latest version of the container image 
   - Submit song requests with name
   - Mobile-friendly interface
 
+- **Support for requests in PlayIt Live**
+  - Place a Break Note item in the playout log or clocks with the text **Request**
+  - The app will look for these break notes and replace the song after the break note with the requested song
+
 - **Admin dashboard**
   - Secure JWT-based authentication system
   - View all song requests
@@ -116,12 +120,14 @@ The application is built with a modern web stack:
 
 Create a `.env` file in the server directory:
 
+```
 PLAYIT_LIVE_BASE_URL=http://your-playit-live-server:port
 PLAYIT_LIVE_API_KEY=your_api_key_here
 REQUESTABLE_TRACK_GROUP_NAME=Optional_Track_Group
 ADMIN_PASSWORD=your_secure_admin_password
 JWT_SECRET=random_secret_key_for_jwt
 PORT=3000
+```
 
 Variables explained:
 - `PLAYIT_LIVE_BASE_URL`: URL of your PlayIt Live server
@@ -169,6 +175,3 @@ docker run -p 3000:3000 \
 ghcr.io/playitlabs/song-requests:latest
 
 The application will be available at `http://localhost:3000`
-
-
-
