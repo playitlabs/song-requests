@@ -161,6 +161,9 @@ npm install
 ### Build client
 npm run build
 
+### Add environment variables
+Create a `.env` file in the server directory as specified in the Environment Variables section.
+
 ### Start server
 cd ../server
 npm start
