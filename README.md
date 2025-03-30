@@ -147,26 +147,36 @@ Variables explained:
 ## Installation
 
 ### Clone the repository
+```bash
 git clone https://github.com/playitlabs/song-requests.git
 cd song-requests
+```
 
 ### Install server dependencies
+```bash
 cd server
 npm install
+```
 
 ### Install client dependencies
+```bash
 cd ../client
 npm install
+```
 
 ### Build client
+```bash
 npm run build
+```
 
 ### Add environment variables
 Create a `.env` file in the server directory as specified in the Environment Variables section.
 
 ### Start server
+```bash
 cd ../server
 npm start
+```
 
 The application will be available at `http://localhost:3000`
 
@@ -175,14 +185,18 @@ The application will be available at `http://localhost:3000`
 A GitHub Actions workflow automatically builds and publishes Docker containers for each release.
 
 ### Pull the latest Docker image
+```bash
 docker pull ghcr.io/playitlabs/song-requests:latest
+```
 
 ### Run the Docker container
+```bash
 docker run -p 3000:3000 \
 -e PLAYIT_LIVE_BASE_URL=http://your-server \
 -e PLAYIT_LIVE_API_KEY=your_key \
 -e ADMIN_PASSWORD=your_secure_password \
 -e REQUESTABLE_TRACK_GROUP_NAME=your_requestable_track_group_name \
 ghcr.io/playitlabs/song-requests:latest
+```
 
 The application will be available at `http://localhost:3000`
